@@ -5,7 +5,7 @@
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- component-scan 설정-->
-	<context:component-scan base-package="egovframework">
+	<context:component-scan base-package="sonframework, egovframework">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -23,6 +23,7 @@
         <property name="basenames">
             <list>
                 <value>classpath:/egovframework/message/com/message-common</value>
+                <value>classpath:/sonframework/message/message-common</value>
                 <value>classpath:/org/egovframe/rte/fdl/idgnr/messages/idgnr</value>
                 <value>classpath:/org/egovframe/rte/fdl/property/messages/properties</value>
             </list>
