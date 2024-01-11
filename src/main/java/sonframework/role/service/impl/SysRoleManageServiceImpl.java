@@ -29,7 +29,7 @@ import sonframework.role.service.SysRoleManageService;
  * </pre>
  */
 
-@Service("egovRoleManageService")
+@Service("sysRoleManageService")
 public class SysRoleManageServiceImpl extends EgovAbstractServiceImpl implements SysRoleManageService {
 
 	@Resource(name="roleManageDAO")

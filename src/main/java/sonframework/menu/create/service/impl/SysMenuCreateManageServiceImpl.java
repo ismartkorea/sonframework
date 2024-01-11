@@ -29,7 +29,7 @@ import sonframework.menu.create.service.SysMenuCreateManageService;
  *
  * </pre>
  */
-@Service("meunCreateManageService")
+@Service("menuCreateManageService")
 public class SysMenuCreateManageServiceImpl extends EgovAbstractServiceImpl implements SysMenuCreateManageService {
 
 	@Resource(name = "menuCreateManageDAO")

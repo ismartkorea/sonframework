@@ -31,7 +31,7 @@ import sonframework.com.service.SysBBSUseInfoManageService;
  *
  * </pre>
  */
-@Service("EgovBBSUseInfoManageService")
+@Service("SysBBSUseInfoManageService")
 public class SysBBSUseInfoManageServiceImpl extends EgovAbstractServiceImpl implements SysBBSUseInfoManageService {
 	
     @Resource(name = "BBSUseInfoManageDAO")

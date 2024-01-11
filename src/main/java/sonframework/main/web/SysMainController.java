@@ -41,7 +41,7 @@ import sonframework.menu.service.SysMenuManageService;
 public class SysMainController {
 
 	/**
-	 * EgovBBSManageService
+	 * SysBBSManageService
 	 */
 	@Resource(name = "SysBBSManageService")
     private SysBBSManageService bbsMngService;

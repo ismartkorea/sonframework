@@ -53,10 +53,10 @@ import sonframework.com.bbs.service.SysBBSManageService;
 @Controller
 public class SysBBSAdminManageController {
 
-	@Resource(name = "EgovBBSManageService")
+	@Resource(name = "SysBBSManageService")
 	private SysBBSManageService bbsMngService;
 
-	@Resource(name = "EgovBBSAttributeManageService")
+	@Resource(name = "SysBBSAttributeManageService")
 	private SysBBSAttributeManageService bbsAttrbService;
 
 	@Resource(name = "EgovFileMngService")
