@@ -1,0 +1,107 @@
+2024-01-11 13:57:32,209  INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext: initialization started
+2024-01-11 13:57:32,800  INFO [org.springframework.security.core.SpringSecurityCoreVersion] You are running with Spring Security Core 5.7.1
+2024-01-11 13:57:32,805  INFO [org.springframework.security.config.SecurityNamespaceHandler] Spring Security 'config' module version is 5.7.1
+2024-01-11 13:57:32,853 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityConfigInitializerBeanDefinitionParser] Load '/META-INF/spring/security/security-config.xml'
+2024-01-11 13:57:32,891 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityConfigInitializerBeanDefinitionParser] EgovSecurityConfigInitializerBeanDefinitionParser httpd load start...
+2024-01-11 13:57:32,892 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityHttp] EgovSecurityHttp START ===
+2024-01-11 13:57:32,892 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityHttp] EgovSecurityHttp create http string
+2024-01-11 13:57:32,892 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityHttp] <?xml version="1.0" encoding="UTF-8"?>
+<beans:beans  xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<http entry-point-ref="loginUrlAuthenticationEntryPoint" request-matcher-ref="requestMatcherTypeFactoryBean"
+	    disable-url-rewriting="false" use-expressions="false">
+
+		<headers defaults-disabled="false">
+			<frame-options policy="SAMEORIGIN"/>
+			<xss-protection enabled="true" block="true"/>
+			<cache-control disabled="false"/>
+		</headers>
+
+		<csrf disabled="true"/>
+
+		<form-login login-page="/egov_security_login" username-parameter="egov_security_username" password-parameter="egov_security_password"/>
+		<logout logout-url="/egov_security_logout"/>
+
+		<anonymous/>
+
+		<session-management session-authentication-strategy-ref="sas"/>
+
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
+		<custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrencyFilter"/>
+		<access-denied-handler ref="csrfAccessDeniedHandler"/>
+	</http>
+</beans:beans>
+
+2024-01-11 13:57:32,892 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityHttp] EgovSecurityHttp END ===
+2024-01-11 13:57:33,007  INFO [org.springframework.security.config.http.HttpSecurityBeanDefinitionParser] Checking sorted filter chain: [Root bean: class [org.springframework.security.web.context.SecurityContextPersistenceFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 400, <concurrencyFilter>, order = 500, Root bean: class [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 600, Root bean: class [org.springframework.security.web.header.HeaderWriterFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 700, Root bean: class [org.springframework.security.web.authentication.logout.LogoutFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 1300, <org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter#0>, order = 2100, Root bean: class [org.springframework.security.web.savedrequest.RequestCacheAwareFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2800, Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.security.config.http.HttpConfigurationBuilder$SecurityContextHolderAwareRequestFilterBeanFactory#0; factoryMethodName=getBean; initMethodName=null; destroyMethodName=null, order = 2900, Root bean: class [org.springframework.security.web.authentication.AnonymousAuthenticationFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 3200, Root bean: class [org.springframework.security.web.session.SessionManagementFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 3500, Root bean: class [org.springframework.security.web.access.ExceptionTranslationFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 3600, <filterSecurityInterceptor>, order = 3699, <org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0>, order = 3700]
+2024-01-11 13:57:33,007 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityConfigInitializerBeanDefinitionParser] EgovSecurityConfigInitializerBeanDefinitionParser httpd load complete...
+2024-01-11 13:57:33,007 DEBUG [org.egovframe.rte.fdl.security.config.EgovSecurityConfigInitializerBeanDefinitionParser] Load '/META-INF/spring/security/method-config.xml'
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+2024-01-11 13:57:34,233  INFO [jdbc.sqltiming] SELECT a.ROLE_PTTRN as "method", b.AUTHOR_CODE authority FROM LETTNROLEINFO a, LETTNAUTHORROLERELATE 
+b WHERE a.ROLE_CODE = b.ROLE_CODE AND a.ROLE_TY = 'method' ORDER BY a.ROLE_SORT 
+ {executed in 13 msec}
+2024-01-11 13:57:34,399 DEBUG [org.egovframe.rte.fdl.cmmn.aspect.ExceptionTransfer] count of ExceptionHandlerServices = 2
+2024-01-11 13:57:35,073 DEBUG [org.egovframe.rte.fdl.property.impl.EgovPropertyServiceImpl] [Properties Service] 프로퍼티 key = pageUnit, 값 = 10 은 이 설정파일에 정의되어 있습니다.
+2024-01-11 13:57:35,073 DEBUG [org.egovframe.rte.fdl.property.impl.EgovPropertyServiceImpl] [Properties Service] 프로퍼티 key = pageSize, 값 = 10 은 이 설정파일에 정의되어 있습니다.
+2024-01-11 13:57:35,073 DEBUG [org.egovframe.rte.fdl.property.impl.EgovPropertyServiceImpl] [Properties Service] 프로퍼티 key = posblAtchFileSize, 값 = 5242880 은 이 설정파일에 정의되어 있습니다.
+2024-01-11 13:57:35,073 DEBUG [org.egovframe.rte.fdl.property.impl.EgovPropertyServiceImpl] [Properties Service] 프로퍼티 key = Globals.fileStorePath, 값 = /user/file/sht/ 은 이 설정파일에 정의되어 있습니다.
+2024-01-11 13:57:35,073 DEBUG [org.egovframe.rte.fdl.property.impl.EgovPropertyServiceImpl] [Properties Service] 프로퍼티 key = Globals.addedOptions, 값 = false 은 이 설정파일에 정의되어 있습니다.
+2024-01-11 13:57:35,223 DEBUG [org.egovframe.rte.fdl.excel.impl.EgovExcelServiceImpl] mapClass : egovframework.let.sym.ccm.zip.service.impl.EgovCcmExcelZipMapping
+2024-01-11 13:57:35,339 DEBUG [org.egovframe.rte.fdl.cryptography.impl.EgovARIACryptoServiceImpl] passwordEncoder's algorithm : SHA-256
+2024-01-11 13:57:35,564  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will not secure Ant [pattern='/css/**']
+2024-01-11 13:57:35,566  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will not secure Ant [pattern='/html/**']
+2024-01-11 13:57:35,567  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will not secure Ant [pattern='/images/**']
+2024-01-11 13:57:35,567  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will not secure Ant [pattern='/js/**']
+2024-01-11 13:57:35,568  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will not secure Ant [pattern='/resource/**']
+2024-01-11 13:57:35,569  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will not secure Regex [pattern='\A/WEB-INF/jsp/.*\Z']
+2024-01-11 13:57:35,770  INFO [jdbc.sqltiming] SELECT a.CHLDRN_ROLE child, a.PARNTS_ROLE parent FROM LETTNROLES_HIERARCHY a LEFT JOIN LETTNROLES_HIERARCHY 
+b on (a.CHLDRN_ROLE = b.PARNTS_ROLE) 
+ {executed in 1 msec}
+2024-01-11 13:57:35,827  INFO [org.egovframe.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager] No authentication manager set. Reauthentication of users when changing passwords will not be performed.
+2024-01-11 13:57:35,827 DEBUG [org.egovframe.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager] ## EgovJdbcUserDetailsManager query : SELECT USER_ID, ESNTL_ID AS PASSWORD, 1 ENABLED, USER_NM, USER_ZIP,                USER_ADRES, USER_EMAIL, USER_SE,  '-' ORGNZT_ID, ESNTL_ID,                '-' ORGNZT_NM FROM COMVNUSERMASTER WHERE CONCAT(USER_SE, USER_ID) = ?
+2024-01-11 13:57:35,828 DEBUG [org.egovframe.rte.fdl.security.userdetails.jdbc.EgovJdbcUserDetailsManager] Mapping Class : sonframework.login.service.impl.SysSessionMapping
+2024-01-11 13:57:35,952  INFO [jdbc.sqltiming] SELECT a.ROLE_PTTRN url, b.AUTHOR_CODE authority FROM LETTNROLEINFO a, LETTNAUTHORROLERELATE 
+b WHERE a.ROLE_CODE = b.ROLE_CODE AND a.ROLE_TY = 'url' ORDER BY a.ROLE_SORT 
+ {executed in 0 msec}
+2024-01-11 13:57:35,979  INFO [org.springframework.security.web.DefaultSecurityFilterChain] Will secure any request with [org.springframework.security.web.context.SecurityContextPersistenceFilter@54c4b07, org.springframework.security.web.session.ConcurrentSessionFilter@4875109e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7831cf5c, org.springframework.security.web.header.HeaderWriterFilter@777d716e, org.springframework.security.web.authentication.logout.LogoutFilter@158f1b1a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3a114354, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a55bfa8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2fe26d67, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ed575e9, org.springframework.security.web.session.SessionManagementFilter@5abcd0d7, org.springframework.security.web.access.ExceptionTranslationFilter@3b44855, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5a67afe9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@538c49c7]
+2024-01-11 13:57:36,034  INFO [org.springframework.security.config.http.DefaultFilterChainValidator] Checking whether login URL '/uat/uia/actionSecurityLogin.do' is accessible with your configuration
+2024-01-11 13:57:36,051  WARN [org.springframework.security.config.http.DefaultFilterChainValidator] Possible error: Filters at position 11 and 12 are both instances of org.springframework.security.web.access.intercept.FilterSecurityInterceptor
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] init() started...
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Replaced access denied url : /sec/ram/accessDenied.do
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Replaced login url : /uat/uia/actionSecurityLogin.do
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Replaced login failure url : /uat/uia/actionSecurityLogin.do?login_error=1
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Replaced logout success url : /uat/uia/egovLoginUsr.do
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Password Encoder Algorithm : plaintext
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Concurrent max sessions : 1
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Concurrent concurrent expired url  : /uat/uia/actionMain.do
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] Default target url : /uat/uia/actionMain.do
+2024-01-11 13:57:36,053 DEBUG [org.egovframe.rte.fdl.security.config.SecurityConfigInitializer] init() ended...
+2024-01-11 13:57:36,230 ERROR [org.apache.commons.validator.FormSet] Form 'loginPolicy' already exists in FormSet[default] - ignoring.
+2024-01-11 13:57:36,270  INFO [org.springframework.scheduling.quartz.SchedulerFactoryBean] Starting Quartz Scheduler now
+2024-01-11 13:57:36,280  INFO [org.springframework.web.context.ContextLoader] Root WebApplicationContext initialized in 4064 ms
+1월 11, 2024 1:57:36 오후 org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring DispatcherServlet 'action'
+2024-01-11 13:57:36,347  INFO [org.springframework.web.servlet.DispatcherServlet] Initializing Servlet 'action'
+2024-01-11 13:57:37,215  INFO [org.springframework.web.servlet.DispatcherServlet] Completed initialization in 867 ms
+1월 11, 2024 1:57:37 오후 org.apache.coyote.AbstractProtocol start
+INFO: 프로토콜 핸들러 ["http-nio-8080"]을(를) 시작합니다.
+1월 11, 2024 1:57:37 오후 org.apache.catalina.startup.Catalina start
+INFO: 서버가 [10841] 밀리초 내에 시작되었습니다.
+2024-01-11 13:58:05,525  INFO [jdbc.sqltiming] INSERT INTO LETTSSYSLOGSUMMARY SELECT DATE_FORMAT(b.CREAT_DT, '%Y%m%d') as OCCRRNC_DE , 'Member-login' 
+as SVC_NM , 'actionLogin' as METHOD_NM , SUM(CASE WHEN b.CONECT_MTHD = 'I' THEN 1 ELSE 0 END) 
+AS CREAT_CO , SUM(CASE WHEN b.CONECT_MTHD = 'U' THEN 1 ELSE 0 END) AS UPDT_CO , SUM(CASE WHEN 
+b.CONECT_MTHD = 'R' THEN 1 ELSE 0 END) AS RDCNT , SUM(CASE WHEN b.CONECT_MTHD = 'O' THEN 1 
+ELSE 0 END) AS DELETE_CO , 0 AS OUTPT_CO , 0 AS ERROR_CO FROM LETTNLOGINLOG b WHERE NOT EXISTS 
+(SELECT c.OCCRRNC_DE FROM LETTSSYSLOGSUMMARY c WHERE c.OCCRRNC_DE = DATE_FORMAT(ADDDATE(SYSDATE(), 
+-1), '%Y%m%d') ) AND DATE_FORMAT(b.CREAT_DT, '%Y%m%d') = DATE_FORMAT(ADDDATE(SYSDATE(), -1), 
+'%Y%m%d') GROUP BY OCCRRNC_DE , b.CONECT_MTHD 
+ {executed in 1 msec}
+2024-01-11 13:58:05,526  INFO [jdbc.sqltiming] DELETE FROM LETTNLOGINLOG WHERE DATE_FORMAT(CREAT_DT, '%Y%m%d') < DATE_FORMAT(ADDDATE(SYSDATE(), 
+-210), '%Y%m%d') 

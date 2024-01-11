@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.egovframe.rte.fdl.cmmn.trace.LeaveaTrace;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.fdl.security.userdetails.util.EgovUserDetailsHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -46,6 +48,8 @@ import sonframework.policy.login.service.SysLoginPolicyService;
  */
 @Controller
 public class SysLoginController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SysLoginController.class);
 
 	/** EgovLoginService */
 	@Resource(name = "loginService")
@@ -75,6 +79,8 @@ public class SysLoginController {
 	 */
 	@RequestMapping(value = "/uat/uia/egovLoginUsr.do")
 	public String loginUsrView(@ModelAttribute("loginVO") LoginVO loginVO, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		LOGGER.debug("### CALL SysLoginController::loginUsrView ###");
+		
 		return "uat/uia/EgovLoginUsr";
 	}
 
