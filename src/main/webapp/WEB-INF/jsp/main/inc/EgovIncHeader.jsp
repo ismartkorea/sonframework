@@ -164,7 +164,7 @@ function fn_egov_modal_remove() {
                 <h2>내부시스템관리</h2>
                 <h3>사용자관리</h3>
                 <ul>
-                    <li><a href="/ebt_webapp/uss/umt/user/EgovUserManage.do">사용자등록관리</a></li>
+                    <li><a href="/ebt_webapp/user/SysUserManage.do">사용자등록관리</a></li>
                     <li><a href="/ebt_webapp/uss/ion/uas/selectUserAbsnceListView.do">사용자부재관리</a></li>
                 </ul>
 
@@ -179,7 +179,7 @@ function fn_egov_modal_remove() {
                 <h3>메뉴관리</h3>
                 <ul>
                     <li><a href="/ebt_webapp/sym/prm/EgovProgramListManageSelect.do">프로그램목록관리</a></li>
-                    <li><a href="/ebt_webapp/sym/mnu/mcm/EgovMenuCreatManageSelect.do">메뉴생성관리</a></li>
+                    <li><a href="/ebt_webapp/menu/create/SysMenuCreatManageSelect.do">메뉴생성관리</a></li>
                     <li><a href="/ebt_webapp/sym/mnu/mpm/EgovMenuManageSelect.do">메뉴목록관리</a></li>
                 </ul>
 

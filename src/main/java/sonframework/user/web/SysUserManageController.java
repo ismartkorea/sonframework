@@ -168,7 +168,7 @@ public class SysUserManageController {
 	 * @param userManageVO 사용자등록정보
 	 * @param bindingResult 입력값검증용 bindingResult
 	 * @param model 화면모델
-	 * @return forward:/uss/umt/user/EgovUserManage.do
+	 * @return forward:/user/SysUserManage.do
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/SysUserInsert.do")
@@ -215,7 +215,7 @@ public class SysUserManageController {
 			//Exception 없이 진행시 등록성공메시지
 			model.addAttribute("resultMsg", "success.common.insert");
 		}
-		return "forward:/uss/umt/user/EgovUserManage.do";
+		return "forward:/user/SysUserManage.do";
 	}
 
 	/**
@@ -275,7 +275,7 @@ public class SysUserManageController {
 	 * @param userManageVO 사용자수정정보
 	 * @param bindingResult 입력값검증용 bindingResult
 	 * @param model 화면모델
-	 * @return forward:/uss/umt/user/EgovUserManage.do
+	 * @return forward:/user/SysUserManage.do
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/SysUserSelectUpdt.do")
@@ -322,7 +322,7 @@ public class SysUserManageController {
 			userManageService.updateUser(userManageVO);
 			//Exception 없이 진행시 수정성공메시지
 			model.addAttribute("resultMsg", "success.common.update");
-			return "forward:/uss/umt/user/EgovUserManage.do";
+			return "forward:/user/SysUserManage.do";
 		}
 	}
 
@@ -331,7 +331,7 @@ public class SysUserManageController {
 	 * @param checkedIdForDel 삭제대상아이디 정보
 	 * @param userSearchVO 검색조건
 	 * @param model 화면모델
-	 * @return forward:/uss/umt/user/EgovUserManage.do
+	 * @return forward:/user/SysUserManage.do
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/SysUserDelete.do")
