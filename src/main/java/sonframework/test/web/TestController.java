@@ -34,7 +34,7 @@ public class TestController {
 		 }		
 		
 		
-		return "test/TestHello.jsp";
+		return "test/TestHello";
 	}
 	
 
@@ -51,6 +51,6 @@ public class TestController {
 		 }		
 		
 		
-		return "test/TestHello.jsp";
+		return "test/TestHello";
 	}	
 }
