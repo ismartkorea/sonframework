@@ -231,7 +231,7 @@ function press() {
                                 <!-- 검색조건 -->
                                 <div class="condition2">
                                 	
-                                	<form name="listForm" action="<c:url value='/uss/umt/user/EgovUserManage.do'/>" method="post">
+                                	<form name="listForm" action="<c:url value='/user/SysUserManage.do'/>" method="post">
                                 	
 									<input type="hidden" name="userId">
 									<input type="hidden" name="pageIndex" value="<c:if test="${empty userAbsnceVO.pageIndex }">1</c:if><c:if test="${!empty userAbsnceVO.pageIndex }"><c:out value='${userAbsnceVO.pageIndex}'/></c:if>">
