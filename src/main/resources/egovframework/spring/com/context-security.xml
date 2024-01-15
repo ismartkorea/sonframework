@@ -10,7 +10,7 @@
 	<security:http pattern="/html/**" security="none"/>
     <security:http pattern="/images/**" security="none"/>
  	<security:http pattern="/js/**" security="none"/>
- 	<security:http pattern="/template/**" security="none"/>
+ 	<security:http pattern="/templates/**" security="none"/>
  	<security:http pattern="/resource/**" security="none"/>
  	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
 
