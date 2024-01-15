@@ -72,7 +72,7 @@ function fInsertMenuCreat() {
     }   
     document.menuCreatManageForm.checkedMenuNoForInsert.value=checkMenuNos;
     document.menuCreatManageForm.checkedAuthorForInsert.value=document.menuCreatManageForm.authorCode.value;
-    document.menuCreatManageForm.action = "<c:url value='/sym/mnu/mcm/EgovMenuCreatInsert.do'/>";
+    document.menuCreatManageForm.action = "<c:url value='/menu/create/SysMenuCreatInsert.do'/>";
     document.menuCreatManageForm.submit(); 
 }
 /* ********************************************************

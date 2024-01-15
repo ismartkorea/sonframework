@@ -74,7 +74,7 @@ function selectMenuCreat(vAuthorCode) {
     document.menuCreatManageForm.authorCode.value = vAuthorCode;
     
     var $dialog = $('<div id="modalPan"></div>')
-	.html('<iframe style="border: 0px; " src="' + "<c:url value='/sym/mnu/mcm/EgovMenuCreatSelect.do'/>?authorCode=" + vAuthorCode + '" width="100%" height="100%"></iframe>')
+	.html('<iframe style="border: 0px; " src="' + "<c:url value='/menu/create/SysMenuCreatSelect.do'/>?authorCode=" + vAuthorCode + '" width="100%" height="100%"></iframe>')
 	.dialog({
     	autoOpen: false,
         modal: true,
