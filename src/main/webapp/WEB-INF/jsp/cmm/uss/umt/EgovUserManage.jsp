@@ -98,17 +98,17 @@ function fnSelectUser(id) {
       
 }
 function fnAddUserView() {
-    document.listForm.action = "<c:url value='/uss/umt/user/EgovUserInsertView.do'/>";
+    document.listForm.action = "<c:url value='/user/SysUserInsertView.do'/>";
     document.listForm.submit();
 }
 function fnLinkPage(pageNo){
     document.listForm.pageIndex.value = pageNo;
-    document.listForm.action = "<c:url value='/uss/umt/user/EgovUserManage.do'/>";
+    document.listForm.action = "<c:url value='/user/SysUserManage.do'/>";
     document.listForm.submit();
 }
 function fnSearch(){
     document.listForm.pageIndex.value = 1;
-    document.listForm.action = "<c:url value='/uss/umt/user/EgovUserManage.do'/>";
+    document.listForm.action = "<c:url value='/user/SysUserManage.do'/>";
     document.listForm.submit();
 }
 function fnViewCheck(){ 
