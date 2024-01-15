@@ -52,5 +52,21 @@ public class TestController {
 		
 		
 		return "test/TestHello";
+	}
+	
+	@RequestMapping(value = "/test/blog/page.do")
+	public String blogPage(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		LOGGER.debug(">>> Called blog !!! <<<");
+		 // 미인증 사용자에 대한 보안처리 
+		 Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated(); 
+		 if(!isAuthenticated) {
+			 model.addAttribute("message",
+			 egovMessageSource.getMessage("fail.common.login")); 
+			 return "uat/uia/EgovLoginUsr"; 
+		 }		
+		
+		
+		return "test/blog/page";
 	}	
 }
