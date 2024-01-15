@@ -93,7 +93,7 @@ function fnSelectUser(id) {
         userId = array[1];    
     }
     document.listForm.selectedId.value = userId;
-    document.listForm.action = "<c:url value='/uss/umt/user/EgovUserSelectUpdtView.do'/>";
+    document.listForm.action = "<c:url value='/user/SysUserSelectUpdtView.do'/>";
     document.listForm.submit();
       
 }
@@ -188,7 +188,7 @@ function fnViewCheck(){
                                     </span>
 
                                     <a href="#LINK" class="item btn btn_blue_46 w_100" onclick="javascript:fnDeleteUser(); return false;"><spring:message code="button.delete" /></a><!-- 삭제 -->
-                                    <a href="<c:url value='/uss/umt/user/EgovUserInsertView.do'/>" class="item btn btn_blue_46 w_100" onclick="fnAddUserView(); return false;"><spring:message code="button.create" /></a><!-- 등록 -->
+                                    <a href="<c:url value='/user/SysUserInsertView.do'/>" class="item btn btn_blue_46 w_100" onclick="fnAddUserView(); return false;"><spring:message code="button.create" /></a><!-- 등록 -->
                                 </div>
                                 <!--// 검색조건 -->
 								
@@ -249,7 +249,7 @@ function fnViewCheck(){
                                                     </span>
                                                 </td>
                                                 <td>
-	                                                <a href="<c:url value='/uss/umt/user/EgovUserSelectUpdtView.do'/>?selectedId=<c:out value="${result.uniqId}"/>" class="lnk" onclick="javascript:fnSelectUser('<c:out value="${result.userTy}"/>:<c:out value="${result.uniqId}"/>'); return false;">
+	                                                <a href="<c:url value='/user/SysUserSelectUpdtView.do'/>?selectedId=<c:out value="${result.uniqId}"/>" class="lnk" onclick="javascript:fnSelectUser('<c:out value="${result.userTy}"/>:<c:out value="${result.uniqId}"/>'); return false;">
 	                                                	<c:out value="${result.userId}"/>
 	                                                </a>
                                                 </td>
