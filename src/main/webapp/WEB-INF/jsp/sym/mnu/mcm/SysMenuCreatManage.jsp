@@ -45,7 +45,7 @@
  * 최초조회 함수
  ******************************************************** */
 function fMenuCreatManageSelect(){ 
-    document.menuCreatManageForm.action = "<c:url value='/sym/mnu/mcm/EgovMenuCreatManageSelect.do'/>";
+    document.menuCreatManageForm.action = "<c:url value='/menu/create/SysMenuCreatManageSelect.do'/>";
     document.menuCreatManageForm.submit();
 }
 
@@ -54,7 +54,7 @@ function fMenuCreatManageSelect(){
  ******************************************************** */
 function linkPage(pageNo){
     document.menuCreatManageForm.pageIndex.value = pageNo;
-    document.menuCreatManageForm.action = "<c:url value='/sym/mnu/mcm/EgovMenuCreatManageSelect.do'/>";
+    document.menuCreatManageForm.action = "<c:url value='/menu/create/SysMenuCreatManageSelect.do'/>";
     document.menuCreatManageForm.submit();
 }
 
@@ -63,7 +63,7 @@ function linkPage(pageNo){
  ******************************************************** */
 function selectMenuCreatManageList() { 
     document.menuCreatManageForm.pageIndex.value = 1;
-    document.menuCreatManageForm.action = "<c:url value='/sym/mnu/mcm/EgovMenuCreatManageSelect.do'/>";
+    document.menuCreatManageForm.action = "<c:url value='/menu/create/SysMenuCreatManageSelect.do'/>";
     document.menuCreatManageForm.submit();
 }
 
