@@ -77,11 +77,11 @@ public class SysLoginController {
 	 * @return 로그인 페이지
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/egovLoginUsr.do")
+	@RequestMapping(value = "/login/loginView.do")
 	public String loginUsrView(@ModelAttribute("loginVO") LoginVO loginVO, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		LOGGER.debug("### CALL SysLoginController::loginUsrView ###");
 		
-		return "uat/uia/EgovLoginUsr";
+		return "login/loginView";
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class SysLoginController {
 	 * @return result - 로그인결과(세션정보)
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionSecurityLogin.do")
+	@RequestMapping(value = "/login/actionSecurityLogin.do")
 	public String actionSecurityLogin(@ModelAttribute("loginVO") LoginVO loginVO, HttpServletResponse response, HttpServletRequest request, ModelMap model) throws Exception {
 
 		// 접속IP
@@ -139,12 +139,13 @@ public class SysLoginController {
 			
 			springSecurity.doFilter(new RequestWrapperForSecurity(request, resultVO.getUserSe()+ resultVO.getId(), resultVO.getUniqId()), response, null);
 			
-			return "forward:/cmm/main/mainPage.do"; // 성공 시 페이지.. (redirect 불가)
+			//return "forward:/cmm/main/mainPage.do"; // 성공 시 페이지.. (redirect 불가)
+			return "forward:/blog/main/mainPage.do";
 
 		} else {
 
 			model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-			return "uat/uia/EgovLoginUsr";
+			return "login/loginView";
 		}
 	}
 
@@ -155,18 +156,18 @@ public class SysLoginController {
 	 * @return 로그인 페이지
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionMain.do")
+	@RequestMapping(value = "/login/actionMain.do")
 	public String actionMain(HttpServletResponse response, HttpServletRequest request, ModelMap model) throws Exception {
 				
 		// 1. Spring Security 사용자권한 처리
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
 		if (!isAuthenticated) {
 			model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-			return "uat/uia/EgovLoginUsr";
+			return "login/loginView";
 		}
 
 		// 2. 메인 페이지 이동
-		return "forward:/cmm/main/mainPage.do";
+		return "forward:/blog/main/mainPage.do";
 	}
 
 	/**
@@ -174,7 +175,7 @@ public class SysLoginController {
 	 * @return String
 	 * @exception Exception
 	 */
-	@RequestMapping(value = "/uat/uia/actionLogout.do")
+	@RequestMapping(value = "/logout/actionLogout.do")
 	public String actionLogout(HttpServletRequest request, ModelMap model) throws Exception {
 		request.getSession().setAttribute("LoginVO", null);
 		
