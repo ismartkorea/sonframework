@@ -33,7 +33,7 @@ import sonframework.front.blog.service.BlogPostService;
 @Controller
 public class BlogPostController {
 
-	@Resource(name = "BlogPostService")
+	@Resource(name = "blogPostService")
 	private BlogPostService blogPostService;
 
 
