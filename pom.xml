@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>egov</groupId>
+	<groupId>sonsystem</groupId>
 	<artifactId>template-enterprise</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>template-enterprise</name>
+	<name>son-blog</name>
 	<url>http://www.egovframe.go.kr</url>
 
 	<licenses>
@@ -210,7 +210,7 @@
     <build>
         <defaultGoal>install</defaultGoal>
         <directory>${basedir}/target</directory>
-		<finalName>ebt_webapp</finalName>
+		<finalName>son_blog</finalName>
         <pluginManagement>
             <plugins>
 				<plugin>
