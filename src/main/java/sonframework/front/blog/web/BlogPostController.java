@@ -304,7 +304,7 @@ public class BlogPostController {
 			blogPostService.insertBlogPostArticle(blogPostInfo);
 		}
 
-		return "forward:/cop/bbs/selectBoardList.do";
+		return "forward:/blog/post/selectBoardList.do";
 	}
 
 	/**
@@ -317,7 +317,7 @@ public class BlogPostController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/cop/bbs/forUpdateBoardArticle.do")
+	@RequestMapping("/blog/post/forUpdateBoardArticle.do")
 	public String selectBoardArticleForUpdt(@ModelAttribute("searchVO") BlogPostInfoVO postVO,
 			@ModelAttribute("blogPostInfo") BlogPostInfoVO vo, ModelMap model) throws Exception {
 
@@ -349,7 +349,7 @@ public class BlogPostController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/cop/bbs/updateBoardArticle.do")
+	@RequestMapping("/blog/post/updateBoardArticle.do")
 	public String updateBoardArticle(final MultipartHttpServletRequest multiRequest,
 			@ModelAttribute("searchVO") BlogPostInfoVO blogPostInfoVO, @ModelAttribute("bdMstr") BoardMaster bdMstr,
 			@ModelAttribute("blogPostInfo") BlogPostInfo blogPostInfo, BindingResult bindingResult, ModelMap model,
