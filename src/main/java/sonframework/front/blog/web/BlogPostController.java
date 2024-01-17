@@ -163,6 +163,8 @@ public class BlogPostController {
 
 		model.addAttribute("result", vo);
 		model.addAttribute("sessionUniqId", user.getUniqId());
+		model.addAttribute("userId", user.getId());
+		model.addAttribute("userNm", user.getName());
 
 		return "blog/post/BlogPostView";
 	}

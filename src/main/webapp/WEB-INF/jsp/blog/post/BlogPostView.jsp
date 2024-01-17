@@ -36,13 +36,13 @@
 	                     <!-- Post title-->
 	                     <h1 class="fw-bolder mb-1">${result.nttSj}</h1>
 	                     <!-- Post meta content-->
-	                     <div class="text-muted fst-italic mb-2">Posted on ${result.frstRegisterPnttm} by ${result.frstRegisterId}</div>
+	                     <div class="text-muted fst-italic mb-2">Posted on ${result.frstRegisterPnttm} by ${userId}</div>
 	                     <!-- Post categories-->
 	                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
 	                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
 	                 </header>
 	                 <!-- Preview image figure-->
-	                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+	                 <figure class="mb-4"><img class="img-fluid rounded" src="<c:url value='/templates/images/900/' />900_300_03.jpg" alt="..." /></figure>
 	                 <!-- Post content-->
 	                 <section class="mb-5">
 						<div id="content"></div>
