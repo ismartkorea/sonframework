@@ -22,6 +22,8 @@
 		    <c:set var="loginId" value="<%= loginVO.getId()%>"/>
 		    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">${loginId}(${loginName})</a></li>
 			<li class="nav-item"><a class="nav-link active" aria-current="page" href="<c:url value='/logout/actionLogout.do'/>">logout</a></li>
+			<li class="nav-item"><a class="nav-link" aria-current="page" href="<c:url value='/logout/actionLogout.do'/>"></a></li>
+			<li class="nav-item"><a class="nav-link active" aria-current="page" href="<c:url value='/blog/post/addBlogPostArticle.do'/>">글쓰기</a></li>
         <% } %>
                     </ul>
                 </div>
