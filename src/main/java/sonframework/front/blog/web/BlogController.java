@@ -1,17 +1,26 @@
 package sonframework.front.blog.web;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import sonframework.com.bbs.service.BoardVO;
+import sonframework.front.blog.service.BlogPostInfoVO;
+import sonframework.front.blog.service.BlogPostService;
 import sonframework.menu.service.MenuManageVO;
 
 @Controller
 public class BlogController {
+	
+	
+	@Resource(name = "blogPostService")
+	private BlogPostService blogPostService;	
 	
 	
 	/**
@@ -23,7 +32,7 @@ public class BlogController {
 	 * @exception Exception Exception
 	 */
 	@RequestMapping(value = "/blog/main/mainPage.do")
-	public String getMgtMainPage(HttpServletRequest request, ModelMap model)
+	public String getMgtMainPage(@ModelAttribute("searchVO") BlogPostInfoVO postVO, HttpServletRequest request, ModelMap model)
 	  throws Exception{
 
 		/*
@@ -63,6 +72,21 @@ public class BlogController {
 		 */
 
 		// 자료실 메인컨텐츠 조회 끝 -----------------------------------
+		postVO.setPageUnit(10);
+		postVO.setPageSize(10);
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+		
+		paginationInfo.setCurrentPageNo(postVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(postVO.getPageUnit());
+		paginationInfo.setPageSize(postVO.getPageSize());
+
+		postVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		postVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		postVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+		
+		model.addAttribute("resultList", blogPostService.selectBlogPostArticles(postVO).get("resultList"));	
+		model.addAttribute("paginationInfo", paginationInfo);
 
 		return "main/BlogMainView";
 	}	

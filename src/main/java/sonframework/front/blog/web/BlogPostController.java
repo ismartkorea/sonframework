@@ -231,7 +231,7 @@ public class BlogPostController {
 		}
 
 		// status.setComplete();
-		return "forward:/blog/post/selectBlogPostList.do";
+		return "forward:/blog/post/selectBlogPostArticle.do";
 	}
 
 	/**
@@ -427,7 +427,7 @@ public class BlogPostController {
 			blogPostService.deleteBlogPostArticle(blogPostInfo);
 		}
 
-		return "forward:/cop/bbs/selectBoardList.do";
+		return "forward:/blog/post/selectBoardList.do";
 	}
 
 }
