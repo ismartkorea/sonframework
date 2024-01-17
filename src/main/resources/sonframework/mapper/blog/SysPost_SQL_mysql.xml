@@ -82,9 +82,7 @@
 		<selectKey keyProperty="nttNo" resultType="java.lang.Long" order="BEFORE">
 			SELECT IFNULL(MAX(SORT_ORDR),0)+1 AS NTT_NO  FROM blog_post_tbl
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+		      AND BBS_ID = 'BLGPST_000000000001'
 		</selectKey>
 		
 			INSERT INTO blog_post_tbl
@@ -108,9 +106,7 @@
 		<selectKey keyProperty="nttNo" resultType="java.lang.Long" order="BEFORE">
 			SELECT IFNULL(MAX(NTT_NO),0)+1 AS NTT_NO  FROM blog_post_tbl
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if> 
+		      AND BBS_ID = 'BLGPST_000000000001'
 			  AND SORT_ORDR = #{sortOrdr}
 		</selectKey>			
 		
@@ -138,9 +134,7 @@
 			FROM
 				blog_post_tbl a	
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>			
+		      AND a.BBS_ID = 'BLGPST_000000000001'		
 			  AND a.SORT_ORDR = #{sortOrdr}
 			ORDER BY  a.SORT_ORDR DESC, a.NTT_NO ASC	
 								
@@ -160,9 +154,7 @@
                 COMVNUSERMASTER b
             ON a.FRST_REGISTER_ID = b.ESNTL_ID 
 			WHERE 1 = 1
-			<if test="bbsId != ''">AND
-				a.BBS_ID = #{bbsId}
-			</if>
+		      AND a.BBS_ID = 'BLGPST_000000000001'
 			<if test="useAt != ''">AND
 				a.USE_AT = #{useAt}
 			</if>
@@ -190,9 +182,8 @@
 			LEFT OUTER JOIN 
 				COMVNUSERMASTER b
 			ON a.FRST_REGISTER_ID = b.ESNTL_ID 
-			WHERE
-				a.BBS_ID = #{bbsId}
-		
+			WHERE 1 = 1
+		      AND a.BBS_ID = 'BLGPST_000000000001'
 			<if test="useAt != ''">AND
 				a.USE_AT = #{useAt}
 			</if>
@@ -227,10 +218,8 @@
 				LETTNBBSMASTER c
 			ON a.BBS_ID = c.BBS_ID			
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
-			AND
+		      AND a.BBS_ID = 'BLGPST_000000000001'
+			  AND
 				a.NTT_ID = #{nttId}	
 						
 	</select> 
@@ -248,7 +237,8 @@
 				LAST_UPDUSR_ID = #{lastUpdusrId},
 				ATCH_FILE_ID = #{atchFileId},
 				LAST_UPDT_PNTTM = SYSDATE()
-			WHERE BBS_ID = #{bbsId}
+			WHERE 1 = 1 
+			AND BBS_ID = 'BLGPST_000000000001''
 			AND NTT_ID = #{nttId}
  		
  	</update>
@@ -261,9 +251,7 @@
 				LAST_UPDUSR_ID = #{lastUpdusrId},
 				LAST_UPDT_PNTTM = SYSDATE()
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+		      AND BBS_ID = 'BLGPST_000000000001'
 			  AND NTT_ID = #{nttId}
  		
  	</update>
@@ -271,7 +259,8 @@
  	<select id="selectMaxInqireCo" parameterType="sonframework.front.blog.service.BlogPostInfoVO" resultType="java.lang.Integer">
  		
 			SELECT IFNULL(MAX(RDCNT),0)+1 AS RDCNT FROM blog_post_tbl
-			WHERE BBS_ID = #{bbsId}
+			WHERE 1 = 1 
+		    AND BBS_ID = 'BLGPST_000000000001'
 			AND NTT_ID = #{nttId}
  		
  	</select>
@@ -283,9 +272,7 @@
 			FROM
 				blog_post_tbl	
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+		    AND BBS_ID = 'BLGPST_000000000001'
 			AND
 				SORT_ORDR = #{sortOrdr}
 			AND 
@@ -300,9 +287,7 @@
 				LAST_UPDUSR_ID = #{lastUpdusrId},
 				LAST_UPDT_PNTTM = SYSDATE()
 			WHERE 1 = 1  
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+		    AND BBS_ID = 'BLGPST_000000000001'
 			AND NTT_ID = #{nttId}
  		
  	</update>
@@ -325,9 +310,7 @@
 			FROM
 				blog_post_tbl a, COMVNUSERMASTER b
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+		    AND a.BBS_ID = 'BLGPST_000000000001'
 			AND 
 				a.FRST_REGISTER_ID = b.ESNTL_ID
 			AND
@@ -344,9 +327,7 @@
 			FROM
 				blog_post_tbl 
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>	
+		    AND BBS_ID = 'BLGPST_000000000001'
 			AND
 				USE_AT = 'Y'
 					
@@ -357,9 +338,7 @@
 			UPDATE blog_post_tbl
 			SET USE_AT = 'N'
 			WHERE 1 = 1 
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+		    AND BBS_ID = 'BLGPST_000000000001'
 			AND NTT_ID = #{nttId}
 					
 	</update>	
@@ -371,9 +350,7 @@
 			FROM
 				blog_post_tbl	
 			WHERE  1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if>
+            AND BBS_ID = 'BLGPST_000000000001
 			AND NTT_ID = #{nttId}				
 		
 	</select>
@@ -382,9 +359,7 @@
 		
 			SELECT NTT_NO FROM blog_post_tbl
 			WHERE 1 = 1
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if> 
+		      AND BBS_ID = 'BLGPST_000000000001'
 			  AND NTT_ID = #{parnts}			
 		
 	</select>
@@ -394,10 +369,8 @@
 			UPDATE blog_post_tbl SET 
 				NTT_NO = NTT_NO + 1
 			WHERE 1 = 1 
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if> 
-			 AND SORT_ORDR = #{sortOrdr}
+		    AND BBS_ID = 'BLGPST_000000000001'
+			AND SORT_ORDR = #{sortOrdr}
 			AND NTT_NO &gt; #{nttNo}
  		
  	</update>
@@ -407,9 +380,7 @@
 			UPDATE blog_post_tbl 
 			   SET NTT_NO = #{nttNo}
 			WHERE 1 = 1 
-			<if test="bbsId != ''">
-		      AND a.BBS_ID = #{bbsId}
-			</if> 
+		    AND BBS_ID = 'BLGPST_000000000001' 
 			AND NTT_ID = #{nttId}
  		
  	</update>
