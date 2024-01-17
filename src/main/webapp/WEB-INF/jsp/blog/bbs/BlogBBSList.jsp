@@ -18,8 +18,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="<c:url value='/templates/blog-home' />/css/styles.css" rel="stylesheet" />
         
-		<link rel="stylesheet" href="<c:url value='/'/>css/base.css">
-		<link rel="stylesheet" href="<c:url value='/'/>css/layout.css">
 		<link rel="stylesheet" href="<c:url value='/'/>css/component.css">
 		<link rel="stylesheet" href="<c:url value='/'/>css/page.css">
 		<script src="<c:url value='/'/>js/jquery-1.11.2.min.js"></script>
@@ -33,24 +31,10 @@
         
         <!-- Page content-->
         <div class="container">
-            <div class="sub_layout">
-                <div class="sub_in">
-                    <div class="layout">
-        
-                        <div class="content_wrap">
-                            <div id="contents" class="content">
-                                 <!-- Location -->
-                                <div class="location">
-                                    <ul>
-                                        <li><a class="home" href="">Home</a></li>
-                                        <li><a href="">알림정보</a></li>
-                                        <li><c:out value="${brdMstrVO.bbsNm}"/></li>
-                                    </ul>
-                                </div>
-                                <!--// Location -->
+            <div class="row">
 
-                                <h1 class="tit_1">알림정보</h1>
-
+                <div class="col-lg-8">
+                <!-- 게시판 부분 -->
                                 <h2 class="tit_2"><c:out value="${brdMstrVO.bbsNm}"/></h2>
                                 
                                 <!-- 검색조건 -->
@@ -191,16 +175,14 @@
                                     </div>
                                 </div>
                                 <!-- //페이지 네비게이션 끝 -->
-						        <!-- right menu -->
-						        <c:import url="/blog/main/blogMenuRight.do" />
-						        <!--// right menu -->
                                 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                         <!-- 게시판 부분 -->       
+                                
+                 </div>
+		        <!-- right menu -->
+		        <c:import url="/blog/main/blogMenuRight.do" />
+		        <!--// right menu -->       
             </div>
-            
         </div>
         
         <!-- Footer -->
