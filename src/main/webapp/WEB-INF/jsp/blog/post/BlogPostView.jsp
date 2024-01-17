@@ -42,7 +42,7 @@
 	                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
 	                 </header>
 	                 <!-- Preview image figure-->
-	                 <figure class="mb-4"><img class="img-fluid rounded" src="<c:url value='/templates/images/900/' />900_300_03.jpg" alt="..." /></figure>
+	                 <figure class="mb-4"><img class="img-fluid rounded" src="<c:url value='/templates/images/900/' />900_400_03.jpg" alt="..." /></figure>
 	                 <!-- Post content-->
 	                 <section class="mb-5">
 						<div id="content"></div>
