@@ -67,7 +67,7 @@
                     
                     	<c:forEach var="result" items="${resultList}" varStatus="status">
                     	<c:if test="${status.index==0}">         
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                        <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/850/' />850_350_02.jpg" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">${result.frstRegisterPnttm}</div>
                             <h2 class="card-title">${result.nttSj}</h2>
@@ -85,7 +85,7 @@
                             <!-- Blog post-->
                             <c:if test="${status.index == 1}"> 
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_01.jpg" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">${result.frstRegisterPnttm}</div>
                                     <h2 class="card-title h4">${result.nttSj}</h2>
@@ -97,7 +97,7 @@
                             <c:if test="${status.index == 2}">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_02.jpg" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">${result.frstRegisterPnttm}</div>
                                     <h2 class="card-title h4">${result.nttSj}</h2>
@@ -112,7 +112,7 @@
                             <!-- Blog post-->
                             <c:if test="${status.index == 3}"> 
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_03.jpg" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">${result.frstRegisterPnttm}</div>
                                     <h2 class="card-title h4">${result.nttSj}</h2>
@@ -124,7 +124,7 @@
                             <!-- Blog post-->
                             <c:if test="${status.index == 4}"> 
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_04.jpg" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">${result.frstRegisterPnttm}</div>
                                     <h2 class="card-title h4">${result.nttSj}</h2>
