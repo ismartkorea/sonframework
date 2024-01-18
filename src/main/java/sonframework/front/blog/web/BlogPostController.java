@@ -349,7 +349,7 @@ public class BlogPostController {
 
 		model.addAttribute("result", blogPostvo);
 
-		return "blog/post/EgovNoticeUpdt";
+		return "blog/post/BlogPostUpdt";
 	}
 
 	/**
@@ -384,7 +384,7 @@ public class BlogPostController {
 
 			model.addAttribute("result", blogPostvo);
 
-			return "blog/post/EgovNoticeUpdt";
+			return "blog/post/BlogPostUpdt";
 		}
 
 		if (isAuthenticated) {
@@ -413,7 +413,15 @@ public class BlogPostController {
 
 		}
 
-		return "forward:/blog/post/selectBoardList.do";
+		// 조회 처리.
+		BlogPostInfoVO vo = blogPostService.selectBlogPostArticle(blogPostInfoVO);
+
+		model.addAttribute("result", vo);
+		model.addAttribute("sessionUniqId", user.getUniqId());
+		model.addAttribute("userId", user.getId());
+		model.addAttribute("userNm", user.getName());
+
+		return "blog/post/BlogPostView";
 	}
 
 	/**
