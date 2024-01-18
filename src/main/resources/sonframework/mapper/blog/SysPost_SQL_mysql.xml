@@ -238,7 +238,7 @@
 				ATCH_FILE_ID = #{atchFileId},
 				LAST_UPDT_PNTTM = SYSDATE()
 			WHERE 1 = 1 
-			AND BBS_ID = 'BLGPST_000000000001''
+			AND BBS_ID = 'BLGPST_000000000001'
 			AND NTT_ID = #{nttId}
  		
  	</update>
