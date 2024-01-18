@@ -30,8 +30,8 @@
 		          min-height: 500px;
 		      }
 			  .ck-content .image {
-			    max-width: 80%;
-			    margin: 20px auto;
+			    max-width: 100%;
+			    margin: 5px auto;
 			  }      
 		</style>		
 		<script>
@@ -178,12 +178,64 @@
         
 
 <!-- ckeditor -->
-<script src="${pageContext.request.contextPath}/assets/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/assets/ckeditor/5/ckeditor.js"></script>
 <script>
   ClassicEditor.create( document.querySelector( '#nttCn' ), {
-    removePlugins: [ 'Heading' ],
-    language: "ko"
-  } );
+      toolbar: {
+          items: [
+              'heading',
+              '|',
+              'bold',
+              'italic',
+              //'underline',(유료)
+              //'strikethrough',(유료)
+              //'subscript',(유료)
+              //'superscript',(유료)
+              '|',
+              //'alignment',(유료)
+              'bulletedList',
+              'numberedList',
+              '|',
+              'indent',
+              'outdent',
+              '|',
+              'link',
+              'blockQuote',
+              //'imageUpload',(유료)
+              'mediaEmbed',
+              '|',
+              'undo',
+              'redo',
+              '|',
+              //'code',(유료)
+              //'codeBlock',(유료)
+              //'|',
+              //'removeFormat',(유료)
+              //'highlight',(유료)
+              //'horizontalLine',(유료)
+              //'|',
+              //'fontSize',(유료)
+              //'fontFamily',(유료)
+              //'fontColor',(유료)
+              //'fontBackgroundColor',(유료)
+              //'|',
+              //'table',(유료)
+              //'tableColumn',(유료)
+              //'tableRow',(유료)
+              //'mergeTableCells',(유료)
+              '|',
+              //'htmlEmbed',(유료)
+              //'MathType'(유료)
+          ]
+      },
+      language: 'ko'
+  })
+  .then(editor => {
+      console.log('Editor was initialized', editor);
+  })
+  .catch(error => {
+      console.error('There was an error initializing the editor', error);
+  });
 </script>
 <!-- ckeditor -->        
         
