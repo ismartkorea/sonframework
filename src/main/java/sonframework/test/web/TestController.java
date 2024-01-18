@@ -134,5 +134,38 @@ public class TestController {
 		
 		
 		return "test/blog/postPage";
-	}	
+	}
+	
+	/**
+	 * 에디터 호출 테스트.
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/test/blog/editorPage.do")
+	public String editorPage(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		LOGGER.debug(">>> Called editorPage !!! <<<");
+
+		return "test/blog/ckEditorPage";
+	}
+	
+	/**
+	 * 에디터 호출 테스트.
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/test/blog/editorPage2.do")
+	public String editorPage2(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		LOGGER.debug(">>> Called editorPage !!! <<<");
+
+		return "test/blog/ckEditorPage2";
+	}		
+	
 }

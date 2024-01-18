@@ -11,6 +11,17 @@ import sonframework.front.blog.service.BlogPostInfoVO;
 
 @Repository("BlogPostServiceDAO")
 public class BlogPostServiceDAO extends EgovAbstractMapper {
+	
+	
+	/**
+	 * 최대 게시문 번호 조회.
+	 * @param post
+	 * @return
+	 * @throws Exception
+	 */
+    public long getBlogPostArticleMaxNo(BlogPostInfo post) throws Exception {
+	  return (Long)selectOne("PostServiceDAO.selectMaxNttId");
+    }
 
     /**
      * 게시판에 게시물을 등록 한다.

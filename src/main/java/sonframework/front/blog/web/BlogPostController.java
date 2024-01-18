@@ -231,9 +231,20 @@ public class BlogPostController {
 
 			blogPostService.insertBlogPostArticle(blogPostInfo);
 		}
+	    // 생성된 게시물 번호 조회.
+		Long nttId = blogPostService.getBlogPostArticleMaxNo(blogPostInfo);
+		postVO.setNttId(nttId);
 
-		// status.setComplete();
-		return "forward:/blog/post/selectBlogPostArticle.do";
+		// 조회 처리.
+		postVO.setLastUpdusrId(user.getUniqId());
+		BlogPostInfoVO vo = blogPostService.selectBlogPostArticle(postVO);
+
+		model.addAttribute("result", vo);
+		model.addAttribute("sessionUniqId", user.getUniqId());
+		model.addAttribute("userId", user.getId());
+		model.addAttribute("userNm", user.getName());
+
+		return "blog/post/BlogPostView";
 	}
 
 	/**

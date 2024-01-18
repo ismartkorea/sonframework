@@ -32,6 +32,11 @@ public class BlogPostServiceImpl extends EgovAbstractServiceImpl implements Blog
     protected EgovPropertyService propertyService;
 
     @Resource(name="leaveaTrace") LeaveaTrace leaveaTrace;
+    
+    public Long getBlogPostArticleMaxNo(BlogPostInfo post) throws Exception {
+    	
+    	return blogPostServiceDAO.getBlogPostArticleMaxNo(post);
+    }
 
     /**
      * 게시물 한 건을 삭제 한다.

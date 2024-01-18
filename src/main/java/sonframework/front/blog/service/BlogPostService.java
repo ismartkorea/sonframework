@@ -3,6 +3,12 @@ package sonframework.front.blog.service;
 import java.util.Map;
 
 public interface BlogPostService {
+	
+    /**
+     * 최대 게시문 번호 조회.
+     *
+     */
+	public Long getBlogPostArticleMaxNo(BlogPostInfo post) throws Exception;
 
     /**
      * 게시물 한 건을 삭제 한다.
