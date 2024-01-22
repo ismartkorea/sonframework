@@ -179,75 +179,242 @@
         
 
 	<!-- ckeditor -->
-	<script src="${pageContext.request.contextPath}/assets/ckeditor/5/ckeditor.js"></script>
-	<script>
-	  ClassicEditor.create( document.querySelector( '#nttCn' ), {
-	      toolbar: {
-	          items: [
-	              'heading',
-	              '|',
-	              'bold',
-	              'italic',
-	              //'underline',(유료)
-	              //'strikethrough',(유료)
-	              //'subscript',(유료)
-	              //'superscript',(유료)
-	              '|',
-	              //'alignment',(유료)
-	              'bulletedList',
-	              'numberedList',
-	              '|',
-	              'indent',
-	              'outdent',
-	              '|',
-	              'link',
-	              'blockQuote',
-	              //'imageUpload',(유료)
-	              'mediaEmbed',
-	              '|',
-	              'undo',
-	              'redo',
-	              '|',
-	              //'code',(유료)
-	              //'codeBlock',(유료)
-	              //'|',
-	              //'removeFormat',(유료)
-	              //'highlight',(유료)
-	              //'horizontalLine',(유료)
-	              //'|',
-	              //'fontSize',(유료)
-	              //'fontFamily',(유료)
-	              //'fontColor',(유료)
-	              //'fontBackgroundColor',(유료)
-	              //'|',
-	              //'table',(유료)
-	              //'tableColumn',(유료)
-	              //'tableRow',(유료)
-	              //'mergeTableCells',(유료)
-	              '|',
-	              //'htmlEmbed',(유료)
-	              //'MathType'(유료)
-	          ]
-	      },
-	      language: 'ko'
-	  })
-	  .then(editor => {
-	      console.log('Editor was initialized', editor);
-	  })
-	  .catch(error => {
-	      console.error('There was an error initializing the editor', error);
-	  });  
-  </script>
+	<script src="<c:url value='${pageContext.request.contextPath}' />/assets/ckeditor/ckeditor.js"></script>
 	<!-- ckeditor --> 
-        <script>
-	        // jQuery를 사용하여 HTML 표시
-	        var encodedString = "${result.nttCn}";
-	        var decodedString = $("<div/>").html(encodedString).text();
-	        console.log(">>> decodedString : " + decodedString);
+    <script>
+     // 에디터 전역 변수 선언
+     var editorPromise;
+        
+     // 에디터 초기화 함수
+     function initializeEditor() {
+        editorPromise = CKEDITOR.ClassicEditor
+        	.create( document.getElementById( 'nttCn' ), {
+        	    toolbar: {
+        	        items: [
+        	          //'exportPDF', 'exportWord', '|',
+        	          //'findAndReplace', 'selectAll', '|',
+        	          'heading', '|',
+        	          'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+        	          'bulletedList', 'numberedList', 'todoList', '|',
+        	          'outdent', 'indent', '|',
+        	          'undo', 'redo', '|',
+        	          'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+        	          'alignment', '|',
+        	          'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+        	          //'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+        	          //'textPartLanguage', '|',
+        	          //'sourceEditing'
+        	        ],
+        	        shouldNotGroupWhenFull: true
+        	      },
+        	      list: {
+        	        properties: {
+        	          styles: true,
+        	          startIndex: true,
+        	          reversed: true
+        	        }
+        	      },
+        	      heading: {
+        	        options: [
+        	          { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+        	          { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+        	          { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+        	          { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+        	          { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+        	          { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+        	          { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+        	        ]
+        	      },
+        	      //placeholder: 'Welcome to CKEditor 5!',
+        	      fontFamily: {
+        	        options: [
+        	          'default',
+        	          'Arial, Helvetica, sans-serif',
+        	          'Courier New, Courier, monospace',
+        	          'Georgia, serif',
+        	          'Lucida Sans Unicode, Lucida Grande, sans-serif',
+        	          'Tahoma, Geneva, sans-serif',
+        	          'Times New Roman, Times, serif',
+        	          'Trebuchet MS, Helvetica, sans-serif',
+        	          'Verdana, Geneva, sans-serif'
+        	        ],
+        	        supportAllValues: true
+        	      },
+        	      fontSize: {
+        	        options: [10, 12, 14, 'default', 18, 20, 22],
+        	        supportAllValues: true
+        	      },
+        	      htmlSupport: {
+        	        allow: [
+        	          {
+        	            name: /.*/,
+        	            attributes: true,
+        	            classes: true,
+        	            styles: true
+        	          }
+        	        ]
+        	      },
+        	      htmlEmbed: {
+        	        showPreviews: true
+        	      },
+        	      link: {
+        	        decorators: {
+        	          addTargetToExternalLinks: true,
+        	          defaultProtocol: 'https://',
+        	          toggleDownloadable: {
+        	            mode: 'manual',
+        	            label: 'Downloadable',
+        	            attributes: {
+        	              download: 'file'
+        	            }
+        	          }
+        	        }
+        	      },
+        	      mention: {
+        	        feeds: [
+        	          {
+        	            marker: '@',
+        	            feed: [
+        	              '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+        	              '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+        	              '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+        	              '@sugar', '@sweet', '@topping', '@wafer'
+        	            ],
+        	            minimumCharacters: 1
+        	          }
+        	        ]
+        	      },
+        	      removePlugins: [
+        	        'ExportPdf',
+        	        'ExportWord',
+        	        'CKBox',
+        	        'CKFinder',
+        	        'EasyImage',
+        	        'RealTimeCollaborativeComments',
+        	        'RealTimeCollaborativeTrackChanges',
+        	        'RealTimeCollaborativeRevisionHistory',
+        	        'PresenceList',
+        	        'Comments',
+        	        'TrackChanges',
+        	        'TrackChangesData',
+        	        'RevisionHistory',
+        	        'Pagination',
+        	        'WProofreader',
+        	        'MathType'
+        	      ]
+  		  })
+  		  .then(editor => {
+				return editor;      		      
+  		  })
+  		  .catch(error => {
+  		      console.error('There was an error initializing the editor', error);
+  		  });
+     }
+
+	        function escapeHtml(text) {
+	            if (typeof text !== 'string') {
+	                return text;
+	            }
 	
-	        // 디코딩된 문자열을 표시
-	        $("#nttCn").html(decodedString);
-        </script>        
+	            return text.replace(/[&<>"'`]/g, function(match) {
+	                return {
+	                '&': '&amp;',
+	                '<': '&lt;',
+	                '>': '&gt;',
+	                '"': '&quot;',
+	                "'": '&#39;',
+	                '`': '&#x60;'
+	                }[match];
+	            });
+	        } 
+	        function unescapeHtml(text) {
+	            if (typeof text !== 'string') {
+	                return text;
+	            }
+	
+	            return text.replace(/&amp;|&lt;|&gt;|&quot;|&#39;|&#x60;/g, function(match) {
+	                return {
+	                '&amp;': '&',
+	                '&lt;': '<',
+	                '&gt;': '>',
+	                '&quot;': '"',
+	                '&#39;': "'",
+	                '&#x60;': '`'
+	                }[match];
+	            });
+	       }
+	        function extractYouTubeUrl(htmlString) {
+	        	  var doc = new DOMParser().parseFromString(htmlString, 'text/html');
+	        	  var oembedElements = doc.querySelectorAll('oembed');
+	        	  console.log(">>> oembedElements : " + oembedElements);
+
+	        	  var youtubeUrls = [];
+	        	  oembedElements.forEach(function (oembedElement) {
+	        	    var youtubeUrl = oembedElement.getAttribute('url');
+	        	    console.log(">>> youtubeUrl : " + youtubeUrl);
+
+	        	    if (youtubeUrl && youtubeUrl.includes('youtu.be')) {
+	        	      youtubeUrls.push(youtubeUrl);
+	        	    }
+	        	  });
+
+	        	  return youtubeUrls;
+	        }	        
+	        function convertYoutubeUrl(url) {
+	        	  // YouTube 단축 URL 형식인지 확인
+	        	  var youtubeShortUrlRegex = /https:\/\/youtu.be\/([a-zA-Z0-9_-]+)/;
+	        	  var match = url.match(youtubeShortUrlRegex);
+
+	        	  if (match && match[1]) {
+	        	    // 단축 URL인 경우 전환
+	        	    var videoId = match[1];
+	        	    return 'http://youtube.com/embed/' + videoId;
+	        	  } else {
+	        	    // 다른 형식의 URL이거나 매치되지 않는 경우 그대로 반환
+	        	    return url;
+	        	  }
+	        }
+        	var encStr = "<c:out value='${result.nttCn}'/>";  	
+	        function convertOembedToIframe(encodedString, targetElementId) {
+	            // 주어진 문자열을 HTML 문서로 파싱
+	            var unescapeHtmlStr = unescapeHtml(encodedString);
+				console.log(">>> unescapeHtmlStr : " + unescapeHtmlStr);	            
+	            var doc = new DOMParser().parseFromString(unescapeHtmlStr, 'text/html');
+	            var oembedElements = doc.querySelectorAll('oembed');
+	            
+	            // 문자열 조작
+	            var modifiedHtml = doc.body.innerHTML;
+	            console.log(">>> modifiedHtml : " + modifiedHtml);
+	        
+	            // editorPromise를 통해 에디터 객체에 접근
+	            editorPromise.then(editorInstance => {
+	            	// CKEditor의 enterMode 옵션을 변경
+	                editorInstance.config.enterMode = CKEDITOR.ENTER_BR;  	
+	            	
+		            // oembed 태그를 찾아서 iframe으로 변환
+		            oembedElements.forEach(function (oembedElement) {
+		                var oembedUrl = oembedElement.getAttribute('url');
+		                console.log(">>> oembedUrl : " + oembedUrl);
+		                var iframeCode = '<iframe width="100%" height="100%" src="' + oembedUrl + '" frameborder="0" allowfullscreen></iframe>';
+		                console.log(">>> iframeCode : " + iframeCode);
+		                oembedElement.replaceWith(iframeCode);
+		            });
+	        
+	            // 변환된 내용을 지정된 요소에 삽입
+	            //$("#" + targetElementId).html(doc.body.innerHTML);
+	            // ClassicEditor를 사용하여 결과값을 지정된 요소에 표시
+		            // 변환된 내용을 에디터에 설정
+		        editorInstance.setData(modifiedHtml);
+
+	        });
+	     }
+	        
+	     // 초기화 함수 호출
+	     initializeEditor();
+	     // embed
+	     convertOembedToIframe(encStr, "nttCn");
+       
+	 </script>        
         
     </body>
 </html>
