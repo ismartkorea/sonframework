@@ -178,64 +178,138 @@
         
 
 <!-- ckeditor -->
-<script src="${pageContext.request.contextPath}/assets/ckeditor/5/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/assets/ckeditor/ckeditor.js"></script>
 <script>
-  ClassicEditor.create( document.querySelector( '#nttCn' ), {
-      toolbar: {
-          items: [
-              'heading',
-              '|',
-              'bold',
-              'italic',
-              //'underline',(유료)
-              //'strikethrough',(유료)
-              //'subscript',(유료)
-              //'superscript',(유료)
-              '|',
-              //'alignment',(유료)
-              'bulletedList',
-              'numberedList',
-              '|',
-              'indent',
-              'outdent',
-              '|',
-              'link',
-              'blockQuote',
-              //'imageUpload',(유료)
-              'mediaEmbed',
-              '|',
-              'undo',
-              'redo',
-              '|',
-              //'code',(유료)
-              //'codeBlock',(유료)
-              //'|',
-              //'removeFormat',(유료)
-              //'highlight',(유료)
-              //'horizontalLine',(유료)
-              //'|',
-              //'fontSize',(유료)
-              //'fontFamily',(유료)
-              //'fontColor',(유료)
-              //'fontBackgroundColor',(유료)
-              //'|',
-              //'table',(유료)
-              //'tableColumn',(유료)
-              //'tableRow',(유료)
-              //'mergeTableCells',(유료)
-              '|',
-              //'htmlEmbed',(유료)
-              //'MathType'(유료)
-          ]
-      },
-      language: 'ko'
-  })
-  .then(editor => {
-      console.log('Editor was initialized', editor);
-  })
-  .catch(error => {
-      console.error('There was an error initializing the editor', error);
-  });
+// 에디터 전역 변수 선언
+var editorPromise;
+   
+// 에디터 초기화 함수
+function initializeEditor() {
+   editorPromise = CKEDITOR.ClassicEditor
+   	.create( document.getElementById( 'nttCn' ), {
+   	    toolbar: {
+   	        items: [
+   	          //'exportPDF', 'exportWord', '|',
+   	          //'findAndReplace', 'selectAll', '|',
+   	          'heading', '|',
+   	          'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+   	          'bulletedList', 'numberedList', 'todoList', '|',
+   	          'outdent', 'indent', '|',
+   	          'undo', 'redo', '|',
+   	          'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+   	          'alignment', '|',
+   	          'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+   	          //'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+   	          //'textPartLanguage', '|',
+   	          //'sourceEditing'
+   	        ],
+   	        shouldNotGroupWhenFull: true
+   	      },
+   	      list: {
+   	        properties: {
+   	          styles: true,
+   	          startIndex: true,
+   	          reversed: true
+   	        }
+   	      },
+   	      heading: {
+   	        options: [
+   	          { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+   	          { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+   	          { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+   	          { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+   	          { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+   	          { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+   	          { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+   	        ]
+   	      },
+   	      //placeholder: 'Welcome to CKEditor 5!',
+   	      fontFamily: {
+   	        options: [
+   	          'default',
+   	          'Arial, Helvetica, sans-serif',
+   	          'Courier New, Courier, monospace',
+   	          'Georgia, serif',
+   	          'Lucida Sans Unicode, Lucida Grande, sans-serif',
+   	          'Tahoma, Geneva, sans-serif',
+   	          'Times New Roman, Times, serif',
+   	          'Trebuchet MS, Helvetica, sans-serif',
+   	          'Verdana, Geneva, sans-serif'
+   	        ],
+   	        supportAllValues: true
+   	      },
+   	      fontSize: {
+   	        options: [10, 12, 14, 'default', 18, 20, 22],
+   	        supportAllValues: true
+   	      },
+   	      htmlSupport: {
+   	        allow: [
+   	          {
+   	            name: /.*/,
+   	            attributes: true,
+   	            classes: true,
+   	            styles: true
+   	          }
+   	        ]
+   	      },
+   	      htmlEmbed: {
+   	        showPreviews: true
+   	      },
+   	      link: {
+   	        decorators: {
+   	          addTargetToExternalLinks: true,
+   	          defaultProtocol: 'https://',
+   	          toggleDownloadable: {
+   	            mode: 'manual',
+   	            label: 'Downloadable',
+   	            attributes: {
+   	              download: 'file'
+   	            }
+   	          }
+   	        }
+   	      },
+   	      mention: {
+   	        feeds: [
+   	          {
+   	            marker: '@',
+   	            feed: [
+   	              '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+   	              '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+   	              '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+   	              '@sugar', '@sweet', '@topping', '@wafer'
+   	            ],
+   	            minimumCharacters: 1
+   	          }
+   	        ]
+   	      },
+   	      removePlugins: [
+   	        'ExportPdf',
+   	        'ExportWord',
+   	        'CKBox',
+   	        'CKFinder',
+   	        'EasyImage',
+   	        'RealTimeCollaborativeComments',
+   	        'RealTimeCollaborativeTrackChanges',
+   	        'RealTimeCollaborativeRevisionHistory',
+   	        'PresenceList',
+   	        'Comments',
+   	        'TrackChanges',
+   	        'TrackChangesData',
+   	        'RevisionHistory',
+   	        'Pagination',
+   	        'WProofreader',
+   	        'MathType'
+   	      ]
+		  })
+		  .then(editor => {
+			return editor;      		      
+		  })
+		  .catch(error => {
+		      console.error('There was an error initializing the editor', error);
+		  });
+}
+// 초기화 함수 호출
+initializeEditor();
 </script>
 <!-- ckeditor -->        
         
