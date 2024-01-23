@@ -282,9 +282,56 @@ function initializeEditor() {
    	          }
    	        ]
    	      },
+/*   	      
    	      mediaEmbed: {
-   	    	previewsInData: true
+   	    	previewsInData: true,
+   	    	removeProviders: ['youtube'],
+            providers: [
+                {
+                    name: 'youtube',
+                    url: [
+                        /^(?:m\.)?youtube\.com\/watch\?v=([\w-]+)/,
+                        /^(?:m\.)?youtube\.com\/v\/([\w-]+)/,
+                        /^youtube\.com\/embed\/([\w-]+)/,
+                        /^youtu\.be\/([\w-]+)/
+                    ],
+                    html: match => {
+                        const id = match[ 1 ];
+
+                        return (
+                            '<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;">' +
+                            `<iframe src="https://www.youtube.com/embed/${ id }" ` +
+                            'style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" ' +
+                            'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>' +
+                            '</iframe>' +
+                            '</div>'
+                        );
+                    }
+                },
+                {
+                    name: 'afreecaTV',
+                    url: [
+                        /^v\.afree\.ca\/ST\/([\w-]+)/,
+                        /^vod\.afreecatv\.com\/([\w-]+)/,
+                        /^play\.afreecatv\.com\/([\w-]+)/,
+                    ],
+                    html: match => {
+                        const id = match[ 1 ];
+
+                        return (
+                            '<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;">' +
+                            `<iframe src="https://openapi.afreecatv.com/oembed/embedinfo/${ id }" ` +
+                            'style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" ' +
+                            'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>' +
+                            '</iframe>' +
+                            '</div>'
+                        );
+                    }
+                },
+            ]   	    	
+   	    	
    	      },
+*/   	      
    	      removePlugins: [
    	        'ExportPdf',
    	        'ExportWord',

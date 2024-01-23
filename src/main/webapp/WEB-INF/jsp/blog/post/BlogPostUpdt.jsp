@@ -283,10 +283,7 @@
         	            minimumCharacters: 1
         	          }
         	        ]
-        	      },
-        	      mediaEmbed: {
-             	    	previewsInData: true
-             	  },        	      
+        	      },       	      
         	      removePlugins: [
         	        'ExportPdf',
         	        'ExportWord',

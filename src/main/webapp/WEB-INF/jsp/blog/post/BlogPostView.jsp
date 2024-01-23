@@ -106,13 +106,127 @@
         <c:import url="/blog/main/blogFooter.do" />
         <!--// Footer -->
         <script>
+	        function escapeHtml(text) {
+	            if (typeof text !== 'string') {
+	                return text;
+	            }
+	
+	            return text.replace(/[&<>"'`]/g, function(match) {
+	                return {
+	                '&': '&amp;',
+	                '<': '&lt;',
+	                '>': '&gt;',
+	                '"': '&quot;',
+	                "'": '&#39;',
+	                '`': '&#x60;'
+	                }[match];
+	            });
+	        } 
+	        function unescapeHtml(text) {
+	            if (typeof text !== 'string') {
+	                return text;
+	            }
+	
+	            return text.replace(/&amp;|&lt;|&gt;|&quot;|&#39;|&#x60;/g, function(match) {
+	                return {
+	                '&amp;': '&',
+	                '&lt;': '<',
+	                '&gt;': '>',
+	                '&quot;': '"',
+	                '&#39;': "'",
+	                '&#x60;': '`'
+	                }[match];
+	            });
+	       }
+	        function extractYouTubeUrl(htmlString) {
+	        	  var doc = new DOMParser().parseFromString(htmlString, 'text/html');
+	        	  var oembedElements = doc.querySelectorAll('oembed');
+	        	  console.log(">>> oembedElements : " + oembedElements);
+	
+	        	  var youtubeUrls = [];
+	        	  oembedElements.forEach(function (oembedElement) {
+	        	    var youtubeUrl = oembedElement.getAttribute('url');
+	        	    console.log(">>> youtubeUrl : " + youtubeUrl);
+	
+	        	    if (youtubeUrl && youtubeUrl.includes('youtu.be')) {
+	        	      youtubeUrls.push(youtubeUrl);
+	        	    }
+	        	  });
+	
+	        	  return youtubeUrls;
+	        }	        
+	        function convertYoutubeUrl(url) {
+	        	  // YouTube 단축 URL 형식인지 확인
+	        	  var youtubeShortUrlRegex = /https:\/\/youtu.be\/([a-zA-Z0-9_-]+)/;
+	        	  var match = url.match(youtubeShortUrlRegex);
+	
+	        	  if (match && match[1]) {
+	        	    // 단축 URL인 경우 전환
+	        	    var videoId = match[1];
+	        	    return 'https://www.youtube.com/embed/' + videoId;
+	        	  } else {
+	        	    // 다른 형식의 URL이거나 매치되지 않는 경우 그대로 반환
+	        	    return url;
+	        	  }
+	        }
+            // YouTube 동영상 ID 추출 함수
+            function getYoutubeVideoID(url) {
+              var match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+              return match && match[1];
+            }	        
+	        function convertOembedToIframe(encodedString, targetElementId) {
+	            // 주어진 문자열을 HTML 문서로 파싱
+	            var unescapeHtmlStr = unescapeHtml(encodedString);
+console.log(">>> unescapeHtmlStr : " + unescapeHtmlStr);	            
+	            var doc = new DOMParser().parseFromString(unescapeHtmlStr, 'text/html');
+	            
+	            // 문자열 조작
+	            var modifiedHtml = doc.body.innerHTML;
+console.log(">>> modifiedHtml : " + modifiedHtml);
+	       
+	            // oembed 태그를 추출하는 정규식
+	            var oembedRegex = /<oembed\s+url="(.*?)"><\/oembed>/;
+	            // 주어진 HTML에서 oembed 태그 추출
+	            var match = modifiedHtml.match(oembedRegex);
+console.log(">>> match =  : " + match);		            
+	            
+	            if(match) {
+	            
+		            // 추출된 URL
+		            var youtubeURL = match && match[1];
+console.log(">>> youtubeURL : " + youtubeURL);
+		            
+		            // YouTube 동영상 ID 추출
+		            var youtubeVideoID = getYoutubeVideoID(youtubeURL);
+console.log(">>> youtubeVideoID : " + youtubeVideoID);
+		            // YouTube iframe 코드 생성
+		            var iframeCode = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + youtubeVideoID + '" frameborder="0" allowfullscreen></iframe>';
+console.log(">>> iframeCode : " + iframeCode);     
+		            // 추출된 oembed 태그를 iframe 코드로 대체
+		            var replacedHTML = modifiedHtml.replace(oembedRegex, iframeCode);    
+console.log(">>> replacedHTML : " + replacedHTML);            
+		            
+		            $("#"+targetElementId).html(replacedHTML);
+		            
+	            } else {
+console.log(">>> original modifiedHtml : " + modifiedHtml);   
+
+	            	
+	            	$("#"+targetElementId).html(modifiedHtml);
+	            	
+	            }
+	     }        
+        
+        
 	        // jQuery를 사용하여 HTML 표시
 	        var encodedString = "${result.nttCn}";
-	        var decodedString = $("<div/>").html(encodedString).text();
-	        console.log(">>> decodedString : " + decodedString);
+	        //var decodedString = $("<div/>").html(encodedString).text();
+	        //console.log(">>> decodedString : " + decodedString);
 	
 	        // 디코딩된 문자열을 표시
-	        $("#content").html(decodedString);
+	        //$("#content").html(decodedString);
+	        convertOembedToIframe(encodedString, 'content');
+	        
         </script>
     </body>
 </html>
