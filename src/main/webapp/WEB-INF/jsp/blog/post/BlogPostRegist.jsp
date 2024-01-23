@@ -282,6 +282,9 @@ function initializeEditor() {
    	          }
    	        ]
    	      },
+   	      mediaEmbed: {
+   	    	previewsInData: true
+   	      },
    	      removePlugins: [
    	        'ExportPdf',
    	        'ExportWord',

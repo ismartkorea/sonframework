@@ -284,6 +284,9 @@
         	          }
         	        ]
         	      },
+        	      mediaEmbed: {
+             	    	previewsInData: true
+             	  },        	      
         	      removePlugins: [
         	        'ExportPdf',
         	        'ExportWord',
