@@ -29,6 +29,12 @@
 
 <script type="text/javascript">
 <!--
+var result = '${resultMsg}';
+if(result!='') {
+	alert(result);
+}
+
+
 function actionLogin() {
 
     if (document.loginForm.id.value =="") {
