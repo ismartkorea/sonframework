@@ -27,6 +27,11 @@ public interface BlogPostService {
      *
      */
     public BlogPostInfoVO selectBlogPostArticle(BlogPostInfoVO postVO) throws Exception;
+	/**
+     * 게시물 대하여 상세 내용(MAX ID)을 조회 한다.
+     *
+     */    
+    public BlogPostInfoVO selectBlogPostArticleByMaxId() throws Exception;
 
 	/**
      * 조건에 맞는 게시물 목록을 조회 한다.

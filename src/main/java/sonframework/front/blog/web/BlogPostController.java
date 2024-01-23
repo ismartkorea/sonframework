@@ -232,12 +232,12 @@ public class BlogPostController {
 			blogPostService.insertBlogPostArticle(blogPostInfo);
 		}
 	    // 생성된 게시물 번호 조회.
-		Long nttId = blogPostService.getBlogPostArticleMaxNo(blogPostInfo);
-		postVO.setNttId(nttId);
+		//Long nttId = blogPostService.getBlogPostArticleMaxNo(blogPostInfo);
+		//postVO.setNttId(nttId);
 
 		// 조회 처리.
 		postVO.setLastUpdusrId(user.getUniqId());
-		BlogPostInfoVO vo = blogPostService.selectBlogPostArticle(postVO);
+		BlogPostInfoVO vo = blogPostService.selectBlogPostArticleByMaxId();
 
 		model.addAttribute("result", vo);
 		model.addAttribute("sessionUniqId", user.getUniqId());

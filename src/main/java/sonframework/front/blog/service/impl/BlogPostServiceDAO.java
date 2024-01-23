@@ -73,6 +73,17 @@ public class BlogPostServiceDAO extends EgovAbstractMapper {
     public BlogPostInfoVO selectBlogPostArticle(BlogPostInfoVO postVO) throws Exception {
 	return (BlogPostInfoVO)selectOne("PostServiceDAO.selectBlogPostArticle", postVO);
     }
+    
+    /**
+     * 게시물 한 건에 대하여 상세 내용을 조회 한다.
+     *
+     * @param BlogPostVO
+     * @return
+     * @throws Exception
+     */
+    public BlogPostInfoVO selectBlogPostArticleByMaxId() throws Exception {
+	return (BlogPostInfoVO)selectOne("PostServiceDAO.selectBlogPostArticleByMaxId","");
+    }    
 
     /**
      * 조건에 맞는 게시물 목록을 조회 한다.

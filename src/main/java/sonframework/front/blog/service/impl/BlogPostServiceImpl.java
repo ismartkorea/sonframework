@@ -96,6 +96,13 @@ public class BlogPostServiceImpl extends EgovAbstractServiceImpl implements Blog
 	
 		return blogPostServiceDAO.selectBlogPostArticle(postVO);
     }
+	/**
+     * 게시물 대하여 상세 내용(MAX)을 조회 한다.
+     *
+     */    
+    public BlogPostInfoVO selectBlogPostArticleByMaxId() throws Exception {
+		return blogPostServiceDAO.selectBlogPostArticleByMaxId();
+    }    
 
 	/**
      * 조건에 맞는 게시물 목록을 조회 한다.
