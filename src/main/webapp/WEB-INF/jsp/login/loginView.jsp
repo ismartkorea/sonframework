@@ -87,6 +87,12 @@ function fnInit() {
     }
     getid(document.loginForm);
 }
+
+function signup() {
+	
+	document.loginForm.action="<c:url value='/user/SysUserInsertView.do'/>";
+	document.loginForm.submit();
+}
 //-->
 </script>
 
@@ -151,7 +157,7 @@ function fnInit() {
                                     </div>
 --%>                                    
                                     <div class="text-center">
-                                        <a class="small" href="register.html">신규 가입</a>
+                                        <a class="small" href="javascript:signup();">신규 가입</a>
                                     </div>
                                 </div>
                             </div>

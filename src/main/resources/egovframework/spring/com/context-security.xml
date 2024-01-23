@@ -14,6 +14,7 @@
  	<security:http pattern="/templates/**" security="none"/>
  	<security:http pattern="/resource/**" security="none"/>
  	<security:http pattern="/user/SysUserInsertView.do" security="none"/>
+ 	<security:http pattern="/user/SysUserInsert.do" security="none"/>
  	<security:http pattern="/uss/umt/cmm/EgovIdDplctCnfirmView.do" security="none"/>
  	<security:http pattern="/uss/umt/cmm/EgovIdDplctCnfirm.do" security="none"/>
  	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>

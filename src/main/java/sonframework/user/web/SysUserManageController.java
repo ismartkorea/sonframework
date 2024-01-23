@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.fdl.security.userdetails.util.EgovUserDetailsHelper;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +47,8 @@ import sonframework.user.service.UserManageVO;
  */
 @Controller
 public class SysUserManageController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SysUserManageController.class);
 
 	/** userManageService */
 	@Resource(name = "userManageService")
@@ -126,12 +130,15 @@ public class SysUserManageController {
 	public String insertUserView(@ModelAttribute("userSearchVO") UserDefaultVO userSearchVO, @ModelAttribute("userManageVO") UserManageVO userManageVO, Model model)
 			throws Exception {
 
+		LOGGER.debug("### Call SysUserInsertView.do ###");
+		
 		// 미인증 사용자에 대한 보안처리
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-    	if(!isAuthenticated) {
-    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "uat/uia/EgovLoginUsr";
-    	}
+		/*
+		 * Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		 * if(!isAuthenticated) { model.addAttribute("message",
+		 * egovMessageSource.getMessage("fail.common.login")); //return
+		 * "uat/uia/EgovLoginUsr"; return "login/loginView"; }
+		 */
 
 		ComDefaultCodeVO vo = new ComDefaultCodeVO();
 
@@ -160,7 +167,8 @@ public class SysUserManageController {
 		vo.setTableNm("LETTNORGNZTINFO");
 		model.addAttribute("groupId_result", cmmUseService.selectGroupIdDetail(vo));
 
-		return "cmm/uss/umt/EgovUserInsert";
+		//return "cmm/uss/umt/EgovUserInsert";
+		return "login/signup/signUp";
 	}
 
 	/**
@@ -175,11 +183,12 @@ public class SysUserManageController {
 	public String insertUser(@ModelAttribute("userManageVO") UserManageVO userManageVO, BindingResult bindingResult, Model model) throws Exception {
 
 		// 미인증 사용자에 대한 보안처리
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-    	if(!isAuthenticated) {
-    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "uat/uia/EgovLoginUsr";
-    	}
+//		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+//    	if(!isAuthenticated) {
+//    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
+//        	//return "uat/uia/EgovLoginUsr";
+//    		return "login/loginView";
+//    	}
 
 		beanValidator.validate(userManageVO, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -209,13 +218,17 @@ public class SysUserManageController {
 			vo.setTableNm("LETTNORGNZTINFO");
 			model.addAttribute("groupId_result", cmmUseService.selectGroupIdDetail(vo));
 			//return "forward:/uss/umt/user/EgovUserInsertView.do";
-			return "cmm/uss/umt/EgovUserInsert";
+			//return "cmm/uss/umt/EgovUserInsert";
+			return "login/signup/signUp";
+			
 		} else {
 			userManageService.insertUser(userManageVO);
 			//Exception 없이 진행시 등록성공메시지
-			model.addAttribute("resultMsg", "success.common.insert");
+			//model.addAttribute("resultMsg", egovMessageSource.getMessage("success.common.insert"));
+			model.addAttribute("resultMsg", "저장처리되었습니다.\n로그인이 안되면 관리자에게 문의하세요.");
 		}
-		return "forward:/user/SysUserManage.do";
+		//return "forward:/user/SysUserManage.do";
+		return "/login/loginView";
 	}
 
 	/**
@@ -267,7 +280,8 @@ public class SysUserManageController {
 		model.addAttribute("userSearchVO", userSearchVO);
 		model.addAttribute("userManageVO", userManageVO);
 
-		return "cmm/uss/umt/EgovUserSelectUpdt";
+		//return "cmm/uss/umt/EgovUserSelectUpdt";
+		return "login/signup/userInfUpdt";
 	}
 
 	/**
@@ -285,7 +299,8 @@ public class SysUserManageController {
 		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
     	if(!isAuthenticated) {
     		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "uat/uia/EgovLoginUsr";
+        	//return "uat/uia/EgovLoginUsr";
+    		return "login/loginView";
     	}
 
 		beanValidator.validate(userManageVO, bindingResult);
@@ -315,7 +330,9 @@ public class SysUserManageController {
 			//그룹정보를 조회 - GROUP_ID정보
 			vo.setTableNm("LETTNORGNZTINFO");
 			model.addAttribute("groupId_result", cmmUseService.selectGroupIdDetail(vo));
-			return "cmm/uss/umt/EgovUserSelectUpdt";
+			//return "cmm/uss/umt/EgovUserSelectUpdt";
+			return "login/signup/userUpdt";
+			
 		} else {
 			//업무사용자 수정시 히스토리 정보를 등록한다.
 			userManageService.insertUserHistory(userManageVO);
@@ -360,11 +377,11 @@ public class SysUserManageController {
 	public String checkIdDplct(ModelMap model) throws Exception {
 
 		// 미인증 사용자에 대한 보안처리
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-    	if(!isAuthenticated) {
-    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "uat/uia/EgovLoginUsr";
-    	}
+//		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+//    	if(!isAuthenticated) {
+//    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
+//        	return "uat/uia/EgovLoginUsr";
+//    	}
 
 		model.addAttribute("checkId", "");
 		model.addAttribute("usedCnt", "-1");
@@ -382,11 +399,11 @@ public class SysUserManageController {
 	public String checkIdDplct(@RequestParam Map<String, Object> commandMap, ModelMap model) throws Exception {
 
 		// 미인증 사용자에 대한 보안처리
-		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
-    	if(!isAuthenticated) {
-    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
-        	return "uat/uia/EgovLoginUsr";
-    	}
+//		Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+//    	if(!isAuthenticated) {
+//    		model.addAttribute("message", egovMessageSource.getMessage("fail.common.login"));
+//        	return "uat/uia/EgovLoginUsr";
+//    	}
 
 		String checkId = (String) commandMap.get("checkId");
 		checkId = new String(checkId.getBytes("ISO-8859-1"), "UTF-8");
