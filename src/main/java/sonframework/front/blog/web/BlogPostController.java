@@ -224,8 +224,13 @@ public class BlogPostController {
 			blogPostInfo.setFrstRegisterId(user.getUniqId());
 			blogPostInfo.setBbsId(blogPostInfo.getBbsId());
 
-			blogPostInfo.setNtcrNm(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
-			blogPostInfo.setPassword(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
+			if(user.getId()!=null) {
+				blogPostInfo.setNtcrId(user.getId());
+				blogPostInfo.setNtcrNm(user.getName());
+			} else {
+				blogPostInfo.setNtcrNm(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
+				blogPostInfo.setPassword(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)				
+			}
 
 			blogPostInfo.setNttCn(unscript(blogPostInfo.getNttCn())); // XSS 방지
 

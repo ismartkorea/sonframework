@@ -42,7 +42,7 @@
 	                     <!-- Post title-->
 	                     <h1 class="fw-bolder mb-1">${result.nttSj}</h1>
 	                     <!-- Post meta content-->
-	                     <div class="text-muted fst-italic mb-2">Posted on ${result.frstRegisterPnttm} by ${userId}</div>
+	                     <div class="text-muted fst-italic mb-2">Posted on ${result.frstRegisterPnttm} by ${result.ntcrId}</div>
 	                     <!-- Post categories-->
 	                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
 	                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
