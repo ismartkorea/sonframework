@@ -132,15 +132,19 @@ function signup() {
                                             <input type="password" class="form-control form-control-user"
                                                 id="password" placeholder="비밀번호를 입력하세요." name="password" onkeydown="javascript:if (event.keyCode == 13) { actionLogin(); }">
                                         </div>
+<%--                                        
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="chk" name="checkId" onClick="javascript:saveid(document.loginForm);">
                                                 <label class="custom-control-label" for="customCheck">ID 저장</label>
                                             </div>
                                         </div>
+--%>  
+
                                         <a href="javascript:actionLogin();" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
+                                                                              
                                         <hr>
 <%--                                        
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -156,15 +160,19 @@ function signup() {
 		                            <input name="j_username" type="hidden"/>
 		                                                                    
                                     </form:form>
-                                    <hr>
-<%--                                    
+<%--                                   
+                                    <hr> 
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
 --%>                                    
                                     <div class="text-center">
                                         <a class="small" href="javascript:signup();">신규 가입</a>
-                                    </div>
+                                    </div>    
+                                    <div class="text-center">
+                                        <p>가입후, 관리자에게 확인신청 부탁드립니다. <br/>관리자가 확인후에 로그인 처리합니다.<p>
+                                    </div> 
+                                    
                                 </div>
                             </div>
                         </div>
