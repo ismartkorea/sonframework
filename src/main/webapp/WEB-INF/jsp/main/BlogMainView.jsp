@@ -29,6 +29,7 @@
 	        }
 	        
 	        function fn_select_List(pageNo) {
+	        	document.frm.nttId.value = "1";
 	            document.frm.pageIndex.value = pageNo;
 	            document.frm.action = "<c:url value='/blog/main/mainPage.do'/>";
 	            document.frm.submit();  
@@ -50,9 +51,15 @@
         
         <!-- Page content-->
         <div class="container">
-            <div class="row">
+            <div class="row">           
+            
                 <!-- Blog entries-->
                 <div class="col-lg-8">
+					<form name="frm" action ="<c:url value='/blog/main/mainPage.do'/>" method="post">
+			            <input type="hidden" name="bbsId" value="<c:out value='BLGPST_000000000001'/>" />            
+						<input type="hidden" name="pageIndex" value="<c:out value='${searchVO.pageIndex}'/>"/>                 
+                        <input type="hidden" id="nttId" name="nttId" value=""/>
+                
                     <!-- Featured blog post-->
                     <div class="card mb-4">
                        <c:if test="${fn:length(resultList) == 0}">
@@ -79,6 +86,7 @@
                     </div>
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
+                    
                     	<c:forEach var="result" items="${resultList}" varStatus="status">
 						<c:if test="${status.index > 0}"> 
                         <div class="col-lg-6">                   
@@ -94,10 +102,17 @@
                                 </div>
                             </div>
                             </c:if>
-                            <c:if test="${status.index == 2}">
+                            <c:if test="${status.index >= 2}">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_02.jpg" alt="..." /></a>
+                                <c:if test="${status.index < 8}">
+                                	<c:set var="statusIndex" value="${status.index+1}" />
+                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_${(status.index+1 < 10 ? '0' : '')}${statusIndex}.jpg" alt="..." /></a>
+                                </c:if>
+                                <c:if test="${status.index >= 8}">
+                                	<c:set var="idx" value="${idx + 1}" />
+                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_${(idx < 10 ? '0' : '')}${idx}.jpg" alt="..." /></a>
+                                </c:if>                                               
                                 <div class="card-body">
                                     <div class="small text-muted">${result.frstRegisterPnttm}</div>
                                     <h2 class="card-title h4">${result.nttSj}</h2>
@@ -107,37 +122,9 @@
                             </div>
                             </c:if>                            
                         </div>
-                        <c:if test="${status.index > 2}">
-                        <div class="col-lg-6">                      
-                            <!-- Blog post-->
-                            <c:if test="${status.index == 3}"> 
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_03.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">${result.frstRegisterPnttm}</div>
-                                    <h2 class="card-title h4">${result.nttSj}</h2>
-                                    <p class="card-text">${fn:substring(result.nttCn, 0, 20)}</p>
-                                    <a class="btn btn-primary" href="javascript:fn_select_article('${result.nttId}')">Read more →</a>
-                                </div>
-                            </div>
-                            </c:if>
-                            <!-- Blog post-->
-                            <c:if test="${status.index == 4}"> 
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="<c:url value='/templates/images/750/' />750_350_04.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">${result.frstRegisterPnttm}</div>
-                                    <h2 class="card-title h4">${result.nttSj}</h2>
-                                    <p class="card-text">${fn:substring(result.nttCn, 0, 20)}</p>
-                                    <a class="btn btn-primary" href="javascript:fn_select_article('${result.nttId}')">Read more →</a>
-                                </div>
-                            </div>
-                            </c:if>  
-                        </div>
-                        </c:if> 
-                        </c:if>                  
+                        </c:if>
                     	</c:forEach>
-                    </div>
+                    </div>                   
 					<!-- 페이지 네비게이션 시작 -->
                      <div class="board_list_bot">
                          <div class="paging" id="paging_div">
@@ -146,24 +133,23 @@
                              </ul>
                          </div>
                      </div>
-                    <!-- //페이지 네비게이션 끝 -->
-                </div>
+                    <!-- //페이지 네비게이션 끝 -->                   
+	
+    				</form> 
+    				               
+                </div> 
 		        <!-- right menu -->
 		        <c:import url="/blog/main/blogMenuRight.do" />
-		        <!--// right menu -->
-
-
+		        <!--// right menu -->                  
+	
+								
             </div>
-        </div>
+           
+        </div>        
         
         <!-- Footer -->
         <c:import url="/blog/main/blogFooter.do" />
         <!--// Footer -->
-		<form name="frm" action ="<c:url value='/blog/main/mainPage.do'/>" method="post">
-			<input name="pageIndex" type="hidden" value="<c:out value='${searchVO.pageIndex}'/>"/>
-			<input name="nttId" type="hidden" value=""/>
-		</form>
-        
         
     </body>
 </html>

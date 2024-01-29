@@ -1,5 +1,8 @@
 package sonframework.front.blog.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import sonframework.com.bbs.service.BoardVO;
 import sonframework.front.blog.service.BlogPostInfoVO;
 import sonframework.front.blog.service.BlogPostService;
 import sonframework.menu.service.MenuManageVO;
@@ -84,8 +86,15 @@ public class BlogController {
 		postVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
 		postVO.setLastIndex(paginationInfo.getLastRecordIndex());
 		postVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+		Map<String, Object> map = blogPostService.selectBlogPostArticles(postVO);
 		
-		model.addAttribute("resultList", blogPostService.selectBlogPostArticles(postVO).get("resultList"));	
+		int totCnt = Integer.parseInt((String) map.get("resultCnt"));
+		// page total count set
+		paginationInfo.setTotalRecordCount(totCnt);
+		
+		model.addAttribute("resultList", map.get("resultList"));
+		model.addAttribute("resultCnt", map.get("resultCnt"));
 		model.addAttribute("paginationInfo", paginationInfo);
 
 		return "main/BlogMainView";
@@ -97,6 +106,7 @@ public class BlogController {
      * @param menuManageVO MenuManageVO
      * @return 출력페이지정보 "EgovIncHeader"
      * @exception Exception
+     * 
      */
     @RequestMapping(value="/blog/main/blogHeader.do")
     public String selectHeader(
