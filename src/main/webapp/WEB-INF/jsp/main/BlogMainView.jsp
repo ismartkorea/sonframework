@@ -117,7 +117,7 @@
                                     <div class="small text-muted">${result.frstRegisterPnttm}</div>
                                     <h2 class="card-title h4">${result.nttSj}</h2>
                                     <p class="card-text">${fn:substring(result.nttCn, 0, 20)}</p>
-                                    <a class="btn btn-primary" href="/blog/post/getBlogPostArticle.do?nttId=${result.nttId}">Read more →</a>
+                                    <a class="btn btn-primary" href="javascript:fn_select_article('${result.nttId}')">Read more →</a>
                                 </div>
                             </div>
                             </c:if>
